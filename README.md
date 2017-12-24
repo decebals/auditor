@@ -55,7 +55,7 @@ In your pom.xml you must define the dependencies to Auditor artifacts with:
 
 where ${auditor.version} is the last Auditor version.
 
-You may want to check for the latest released version using [Maven Search](http://search.maven.org/#search%7Cga%7C1%7Cro.fortsoft.auditor)
+You may want to check for the latest released version using [Maven Search](http://search.maven.org/#search%7Cga%7C1%7Cro.fortsoft.auditor).
 
 Also you can use the latest SNAPSHOT via the Sonatype Maven Repository. For this, you must add above lines in your `pom.xml`:
 
@@ -95,6 +95,21 @@ public class MyBusinessClass {
 }
 ```
 
+Internally `Log4jAuditor`, when receive a `AuditEvent`, transforms the audit event in a Log4j's [LoggingEvent](https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/spi/LoggingEvent.html)
+and append the logging event to the all appenders assigned to audit logger.
+Before passing the logging event to appenders, `Log4jAuditor` tries to extract information like `username`, `session` and `ip` from [MDC](https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/MDC.html) if this information is missing from the audit event.
+So, you can put this information somewhere in your code (for example a servlet filter):
+```java
+MDC.put("username", username);
+MDC.put("session", sessionId);
+MDC.put("ip", hostname);
+```
+
+and create the audit event with a more short line:
+```java
+auditor.audit(new AuditEvent("Login"));
+```
+ 
 Sure, you can use any out of the box Auditor implementation or create your custom Auditor implementation, but if you use Log4J in your project for logging (like me)
 I suggest you to use `Log4jAuditor` (from `auditor-log4j`, si don't forget to add it to your project as dependency).  
   
