@@ -1,7 +1,7 @@
 Auditing micro framework for Java
 =====================
 [![Travis CI Build Status](https://travis-ci.org/decebals/auditor.png)](https://travis-ci.org/decebals/auditor)
-[![Maven Central](http://img.shields.io/maven-central/v/ro.fortsoft.auditor/auditor.svg)](http://search.maven.org/#search|ga|1|ro.fortsoft.auditor)
+[![Maven Central](http://img.shields.io/maven-central/v/ro.fortsoft.auditor/auditor-parent.svg)](http://search.maven.org/#search|ga|1|ro.fortsoft.auditor)
 
 The goal of this project is to create a tiny auditing micro framework that could be very easy to understand and hack.
  
@@ -55,7 +55,7 @@ In your pom.xml you must define the dependencies to Auditor artifacts with:
 
 where ${auditor.version} is the last Auditor version.
 
-You may want to check for the latest released version using [Maven Search](http://search.maven.org/#search%7Cga%7C1%7Cauditor)
+You may want to check for the latest released version using [Maven Search](http://search.maven.org/#search%7Cga%7C1%7Cro.fortsoft.auditor)
 
 Also you can use the latest SNAPSHOT via the Sonatype Maven Repository. For this, you must add above lines in your `pom.xml`:
 
