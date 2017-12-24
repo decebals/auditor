@@ -1,7 +1,7 @@
 Auditing micro framework for Java
 =====================
 [![Travis CI Build Status](https://travis-ci.org/decebals/auditor.png)](https://travis-ci.org/decebals/auditor)
-[![Maven Central](http://img.shields.io/maven-central/v/ro.fortsoft.auditor/auditor.svg)](http://search.maven.org/#search|ga|1|auditor)
+[![Maven Central](http://img.shields.io/maven-central/v/ro.fortsoft.auditor/auditor.svg)](http://search.maven.org/#search|ga|1|ro.fortsoft.auditor)
 
 The goal of this project is to create a tiny auditing micro framework that could be very easy to understand and hack.
  
@@ -119,12 +119,16 @@ log4j.appender.file.layout=ro.fortsoft.auditor.log4j.AuditPatternLayout
 log4j.appender.file.layout.ConversionPattern=[%d{MM/dd/yyyy HH:mm:ss}] %-5p %U %S %H %m%n
 ```
  
-In appender is useful to add `AuditPatternLayout` pattern layout (penultimate line).  
+In appender is useful to add `AuditPatternLayout` pattern layout (penultimate line).
+Available patterns:
+- [%U] - username
+- [%S] - session
+- [%H] - host name/address  
  
 Now if you run your application, in `./logs/audit.log` you will see something like:
 ```java
-[12/24/2017 02:00:06] DEBUG decebal1 b844d5e4-6fc0-4ec7-b402-8e7668e5a2b3 localhost Login
-[12/24/2017 02:00:06] DEBUG decebal2 25925950-ecab-41dd-ac8f-d7fcf6099263 127.0.0.1 Login
+[12/24/2017 02:00:06] INFO decebal1 b844d5e4-6fc0-4ec7-b402-8e7668e5a2b3 localhost Login
+[12/24/2017 02:00:06] INFO decebal2 25925950-ecab-41dd-ac8f-d7fcf6099263 127.0.0.1 Login
 ```
  
 For the patterns added by `AuditPatternLayout` see the [javadoc](https://github.com/decebals/auditor/blob/master/auditor-log4j/src/main/java/ro/fortsoft/auditor/log4j/AuditPatternLayout.java#L25) of class.
