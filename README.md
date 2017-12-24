@@ -95,6 +95,40 @@ public class MyBusinessClass {
 }
 ```
 
+Sure, you can use any out of the box Auditor implementation or create your custom Auditor implementation, but if you use Log4J in your project for logging (like me)
+I suggest you to use `Log4jAuditor` (from `auditor-log4j`, si don't forget to add it to your project as dependency).  
+  
+I will give you addition information about how to use `Log4jAuditor` in your project.  
+First of all add a [log4j.properties](https://github.com/decebals/auditor/blob/master/auditor-log4j/src/test/resources/log4j.properties) file to your project.  
+
+To use auditor you should add (in your log4j.properties) the logger:
+```
+#
+# Loggers
+#
+log4j.logger.audit=INFO, file
+``` 
+
+and the appender:
+```
+log4j.appender.file=org.apache.log4j.RollingFileAppender
+log4j.appender.file.File=./logs/audit.log
+log4j.appender.file.MaxFileSize=1MB
+log4j.appender.file.MaxBackupIndex=10
+log4j.appender.file.layout=ro.fortsoft.auditor.log4j.AuditPatternLayout
+log4j.appender.file.layout.ConversionPattern=[%d{MM/dd/yyyy HH:mm:ss}] %-5p %U %S %H %m%n
+```
+ 
+In appender is useful to add `AuditPatternLayout` pattern layout (penultimate line).  
+ 
+Now if you run your application, in `./logs/audit.log` you will see something like:
+```java
+[12/24/2017 02:00:06] DEBUG decebal1 b844d5e4-6fc0-4ec7-b402-8e7668e5a2b3 localhost Login
+[12/24/2017 02:00:06] DEBUG decebal2 25925950-ecab-41dd-ac8f-d7fcf6099263 127.0.0.1 Login
+```
+ 
+For the patterns added by `AuditPatternLayout` see the [javadoc](https://github.com/decebals/auditor/blob/master/auditor-log4j/src/main/java/ro/fortsoft/auditor/log4j/AuditPatternLayout.java#L25) of class.
+ 
 Versioning
 ------------
 Auditor will be maintained under the Semantic Versioning guidelines as much as possible.
