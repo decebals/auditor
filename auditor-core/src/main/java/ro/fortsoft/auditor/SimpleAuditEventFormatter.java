@@ -15,6 +15,9 @@
  */
 package ro.fortsoft.auditor;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * It's a very simple implementation of {@link AuditEventFormatter}.
  * If it's not specified a formatter, then in all cases this formatter is used (it's the default).
@@ -25,15 +28,26 @@ public class SimpleAuditEventFormatter implements AuditEventFormatter {
 
     private static SimpleAuditEventFormatter singleton = new SimpleAuditEventFormatter();
 
+    private DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
     public static SimpleAuditEventFormatter get() {
         return singleton;
+    }
+
+    /**
+     * Set the date format. The default pattern is "MM/dd/yyyy HH:mm:ss"
+     *
+     * @param dateFormat
+     */
+    public void setDateFormat(DateFormat dateFormat) {
+        this.dateFormat = dateFormat;
     }
 
     /**
      * Format an audit event.
      * The result will be:
      * {@code
-     * username? session? ip? - action context? - errorMessage?
+     * [date] username? session? ip? - action context? - errorMessage?
      * }
      * where {@code ?} means optional, if it's null or empty the field is ignored.
      *
@@ -44,28 +58,29 @@ public class SimpleAuditEventFormatter implements AuditEventFormatter {
     public String formatEvent(AuditEvent event) {
         StringBuilder sb = new StringBuilder();
 
+        sb.append('[');
+        sb.append(dateFormat.format(event.getDate()));
+        sb.append("] ");
+
         String username = event.getUsername();
         if (username != null && !username.isEmpty()) {
             sb.append(username);
-            sb.append(" ");
+            sb.append(' ');
         }
 
         String session = event.getSession();
         if (session != null && !session.isEmpty()) {
             sb.append(session);
-            sb.append(" ");
+            sb.append(' ');
         }
 
         String ip = event.getIp();
         if (ip != null && !ip.isEmpty()) {
             sb.append(ip);
-            sb.append(" ");
+            sb.append(' ');
         }
 
-        if (sb.length() != 0) {
-            sb.append("- ");
-        }
-
+        sb.append("- ");
         sb.append(event.getAction());
 
         sb.append(formatContext(event));
