@@ -28,7 +28,9 @@ Log4J comes with a huge number of appender implementations (async, database, ...
 In conclusion the performance of Auditor is dictated by the performance of the Log4J's appender implementation.    
 
 For people that don't want to use Log4J based auditor implementation and want something small, 
-I will supply some trivial auditor implementation like `ConsoleAuditor` and `FileAuditor`.  
+this library comes with some common auditor implementations like [ConsoleAuditor](https://github.com/decebals/auditor/blob/master/auditor-core/src/main/java/ro/fortsoft/auditor/ConsoleAuditor.java), 
+[FileAuditor](https://github.com/decebals/auditor/blob/master/auditor-core/src/main/java/ro/fortsoft/auditor/FileAuditor.java) 
+and [AsyncFileAuditor](https://github.com/decebals/auditor/blob/master/auditor-core/src/main/java/ro/fortsoft/auditor/AsyncFileAuditor.java).  
 
 Components
 -------------------
