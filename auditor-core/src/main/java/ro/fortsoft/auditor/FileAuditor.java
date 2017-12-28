@@ -26,6 +26,7 @@ import java.io.PrintWriter;
  * Events are printed to file.
  * The conversion to {@link String} is made using a {@link AuditEventFormatter}.
  * If a formatter is not specified then {@link SimpleAuditEventFormatter} is used.
+ * The class is thread safe.
 
  * @author Decebal Suiu
  */
@@ -44,7 +45,7 @@ public class FileAuditor implements Auditor {
     }
 
     @Override
-    public void audit(AuditEvent event) {
+    public synchronized void audit(AuditEvent event) {
         writer.println(formatter.formatEvent(event));
     }
 

@@ -20,6 +20,7 @@ package ro.fortsoft.auditor;
  * Events are printed to console via {@link System#out#println}.
  * The conversion to {@link String} is made using a {@link AuditEventFormatter}.
  * If a formatter is not specified then {@link SimpleAuditEventFormatter} is used.
+ * The class is thread safe.
  *
  * @author Decebal Suiu
  */
