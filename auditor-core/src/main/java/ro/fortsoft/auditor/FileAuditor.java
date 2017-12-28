@@ -32,8 +32,8 @@ import java.io.PrintWriter;
  */
 public class FileAuditor implements Auditor {
 
-    private final PrintWriter writer;
-    private final AuditEventFormatter formatter;
+    protected final PrintWriter writer;
+    protected final AuditEventFormatter formatter;
 
     public FileAuditor(File file) throws IOException {
         this(file, SimpleAuditEventFormatter.get());
