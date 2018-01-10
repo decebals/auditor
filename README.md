@@ -13,7 +13,7 @@ I recommend you to use this library in small and medium applications.
 
 If you need something more powerful, please take a look at the excellent [Audit4J](http://audit4j.org) library.
 
-Why I created Auditor and I did't use Audit4J?  
+Why I created Auditor and I didn't use Audit4J?  
 First of all, Audit4J is excellent but it's a little heavy (with maybe to many dependencies) for my taste.
 In a [comment](https://github.com/audit4j/audit4j-core/issues/62), the man behind Audit4J says:
 > From the initial stage, audit4j is designed for the enterprise applications and we haven't designed audit4j for embedded systems. 
@@ -21,8 +21,7 @@ Initially we used ActiveMQ to handle audit events asynchronously but It's not th
 Currently audit4j is built around reactor and various streams.
   
 In my projects I already use Log4J for auditing, so my idea is to use the Log4J ecosystem for auditing.   
-So, I created an Log4J based auditor implementation (`Log4jAuditor` class), and I improved the Log4J's pattern layout (`AuditPatternLayout` class)
-with an implementation capable of capturing audit event details.  
+So, I created an Log4J based auditor (`Log4jAuditor` class), and I improved the Log4J's pattern layout (`AuditPatternLayout` class) with an implementation capable of capturing audit event details.  
 I don't want to reinvent things (file rolling, layout patterns, different kind of storages, ...) so I will let the Log4J's ecosystem to work for me.   
 Log4J comes with a huge number of appender implementations (async, database, ...), so anytime I can choose the implementation that I need it.
 In conclusion the performance of Auditor is dictated by the performance of the Log4J's appender implementation.    
